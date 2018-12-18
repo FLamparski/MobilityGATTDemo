@@ -1,0 +1,22 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "/home/filip/.arduino15/packages/esp32/tools/**",
+                "/home/filip/.arduino15/packages/esp32/hardware/esp32/1.0.0/**",
+                "${workspaceFolder}/**",
+                "/home/filip/.arduino15/packages/esp32/hardware/esp32/1.0.0/tools/sdk/include/freertos/**",
+                "/home/filip/.arduino15/packages/esp32/hardware/esp32/1.0.0/libraries/BLE/src",
+                "/home/filip/.arduino15/packages/esp32/hardware/esp32/1.0.0/tools/sdk"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "clang-x64",
+            "forcedInclude": []
+        }
+    ],
+    "version": 4
+}
