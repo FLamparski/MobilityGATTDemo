@@ -11,28 +11,7 @@
 #define EVT_CMD_GET_SAMPLES MASK(2)
 EventGroupHandle_t eventFlags = xEventGroupCreate();
 
-// For UART-style service:
-/*
-   The service advertises itself as: 6E400001-B5A3-F393-E0A9-E50E24DCCA9E
-   Has a characteristic of: 6E400002-B5A3-F393-E0A9-E50E24DCCA9E - used for receiving data with "WRITE" 
-   Has a characteristic of: 6E400003-B5A3-F393-E0A9-E50E24DCCA9E - used to send data with "NOTIFY"
-*/
-// #define SERVICE_UUID           "6E400001-B5A3-F393-E0A9-E50E24DCCA9E" // UART service UUID
-// #define CHARACTERISTIC_UUID_RX "6E400002-B5A3-F393-E0A9-E50E24DCCA9E"
-// #define CHARACTERISTIC_UUID_TX "6E400003-B5A3-F393-E0A9-E50E24DCCA9E"
-// #define CHARACTERISTIC_UUID_EXTRA "6E400004-B5A3-F393-E0A9-E50E24DCCA9E"
-
-// For notify-and-read style service:
-/*
-   The service advertises itself as 19e1b670-3e07-43f2-8056-0c01c019cf78.
-   Characteristic at 19e1b671... receives data with WRITE
-   Characteristic at 19e1b672... sends data with READ (upon request)
-   Characteristic at 19e1b673... informs client there is new data on 19e1b672
-*/
-
-
 AppBLEService bleService;
-
 
 void setup() {
     Serial.begin(115200);
@@ -61,12 +40,14 @@ void setup() {
     xTaskCreate(taskConnectionHandler, "connection-handler", 3 * 1024, nullptr, tskIDLE_PRIORITY, nullptr);
 }
 
+// Currently not used
 void transmitKeepalive(int timestamp) {
     std::ostringstream buffer;
     buffer << "{\"type\":\"DEVICE_ALIVE\",\"ts\":" << timestamp << "}\r\n";
     bleService.writeData(buffer.str());
 }
 
+// Simulates the device transmitting samples to the app
 void transmitSamples(int timestamp) {
     std::ostringstream buffer;
     buffer << "{\"type\":\"DEVICE_SAMPLES\",\"ts\":" << timestamp << "\",\"payload\":[";
