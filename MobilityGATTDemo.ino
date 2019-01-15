@@ -69,10 +69,10 @@ void transmitKeepalive(int timestamp) {
 // Simulates the device transmitting samples to the app
 void transmitSamples(int timestamp) {
     std::ostringstream buffer;
-    buffer << "{\"type\":\"DEVICE_SAMPLES\",\"ts\":" << timestamp << "\",\"payload\":[";
+    buffer << "{\"type\":\"DEVICE_SAMPLES\",\"ts\":" << timestamp << ",\"payload\":[";
     for (int i = 10; i >= 0; i--) {
         int roundId = timestamp - timestamp % 60 - i * 60;
-        buffer << "{\"roundId\":" << roundId << ",\"device\":\"11:22:33:44:55:66\",\"type\":\"MOVEMENT_ROUND_DATA\",\"distanceDriven\":230.54}";
+        buffer << "{\"roundId\":" << roundId << ",\"deviceId\":\"11:22:33:44:55:66\",\"roundDataType\":\"METRIC_ROUND_DATA\",\"distanceDriven\":230.54}";
         if (i > 0) {
             buffer << ",";
         }
